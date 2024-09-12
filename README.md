@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AI Course Generator
 
-## Getting Started
+An AI-powered platform for creating and managing online courses. Built using **Next.js** and integrated with **Clerk** for authentication, **Gemini API** for AI-generated content, and **Firebase** for file storage, this platform allows users to create, track, and manage their courses, while administrators can oversee user and course management.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **User Authentication**: Managed via Clerk (Login, Registration).
+- **Admin Dashboard**: Special access for admins to manage users and courses.
+- **Course Creation**: Users can generate and manage their own courses using AI.
+- **File Storage**: Courses and media are stored in Firebase.
+- **AI Integration**: Content is generated with the Gemini API.
+- **Responsive UI**: Optimized for both desktop and mobile devices.
+- **Progress Tracking**: Displays user course progress.
+- **Role-based Management**: Different views for admin and regular users.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Next.js 14.x**: Server-side rendering and static generation framework.
+- **Clerk**: Authentication and user management.
+- **Gemini API**: For AI-generated course content.
+- **Firebase**: File storage and database management.
+- **Tailwind CSS**: A utility-first CSS framework.
+- **React Icons**: Icon library.
+- **Vercel**: Hosting and deployment platform.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Installation
 
-## Learn More
+1. Clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+    git clone https://github.com/mrpankajpandey/ai-course-generator.git
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. ## Environment Variables
+   ```bash
+    NEXT_PUBLIC_CLERK_FRONTEND_API=<your-clerk-frontend-api>
+    CLERK_API_KEY=<your-clerk-api-key>
+    GEMINI_API_KEY=<your-gemini-api-key>
+    FIREBASE_API_KEY=<your-firebase-api-key>
+    FIREBASE_PROJECT_ID=<your-firebase-project-id>
+    DATABASE_URL=<your-database-url>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Live Demo
+ ## Check out the live version of the project here: [AI Course Generator](https://mrpankajpandey-ai-course.vercel.app/)
