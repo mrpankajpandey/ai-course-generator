@@ -1,8 +1,9 @@
 import { UserButton } from '@clerk/nextjs'
 import React from 'react'
-import Addcourse from './_components/Addcourse'
+
 import { CourseList } from '@/configs/Schema'
 import UserCourseList from './_components/UserCourseList'
+import Addcourse from './_components/AddCourse'
 
 const Dashboard = () => {
   return (
