@@ -1,3 +1,4 @@
+"use client"
 // pages/dashboard/logout.jsx
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
