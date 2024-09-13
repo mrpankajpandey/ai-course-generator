@@ -7,10 +7,20 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import React, { use, useEffect, useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const AdminUsers = () => {
   const { user } = useUser();
   const [users, setUsers] = useState([]);
+  const [userCount, setUserCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   // const adminEmail = "mr.pankajpandey0038@gmail.com";
@@ -28,7 +38,10 @@ const AdminUsers = () => {
         }
         const data = await response.json();
         setUsers(data);
-        console.log(data);
+        // console.log(data);
+         setUserCount(data.length);
+       
+        
       } catch (error) {
         console.error("Error fetching users:", error);
       } finally {
@@ -52,8 +65,7 @@ const AdminUsers = () => {
     }
     // adminConfig.email= email;
     const updatedAdminConfig = { ...adminConfig, email };
-    console.log(adminConfig);
-    console.log(updatedAdminConfig);
+    
   };
   if (!isAdmin) {
     router.push("/dashboard");
@@ -68,69 +80,73 @@ const AdminUsers = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <table className="min-w-full bg-white border border-gray-300">
-          <thead>
-            <tr>
-              <th className="py-2 px-4 border-b">Profile Image</th>
-              <th className="py-2 px-4 border-b">Name</th>
-              <th className="py-2 px-4 border-b">Email</th>
-              <th className="py-2 px-4 border-b">Created At</th>
-              <th className="py-2 px-4 border-b">Last SignIn </th>
-            </tr>
-          </thead>
-          <tbody>
+        <>
+          <Table>
+            <TableCaption>Total User : {userCount}</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">Profile Image</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Created At</TableHead>
+                <TableHead className="text-right">Last SignIn</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
             {users.map((user) => (
-              <tr key={user.id}>
-                <td className="py-2 px-4 border-b ">
-                  <Image
-                    className="rounded-md"
-                    src={user?.image_url}
-                    width={44}
-                    height={44}
-                  />
-                </td>
-                <td className="py-2 px-4 border-b">
-                  {user.first_name} {user.last_name}
-                </td>
-                {/* <td className="py-2 px-4 border-b">{user.id}</td> */}
-                <td className="py-2 px-4 border-b">
-                  {" "}
-                  <a href={`mailto:${user.email_addresses[0]?.email_address}`}>
-                    {" "}
-                    {user.email_addresses[0]?.email_address}
-                  </a>{" "}
-                </td>
-                <td className="py-2 px-4 border-b">
-                  {new Date(user.created_at).toLocaleDateString(
-                    "en-GB",
-                    dateOptions
-                  )}
-                </td>
-                <td className="py-2 px-4 border-b">
-                  {new Date(user?.last_sign_in_at).toLocaleDateString(
-                    "en-GB",
-                    dateOptions
-                  )}
-                </td>
-                <td className="py-2 px-4 border-b">
-                  {adminConfig.emails.includes(
-                    user.email_addresses[0]?.email_address
-                  ) ? (
-                    <Button>Admin</Button>
-                  ) : (
-                    <Button
-                      onClick={() =>
-                        handleAddAdmin(user.email_addresses[0]?.email_address)
-                      }
+              <TableRow key={user.id}>
+                <TableCell className="font-medium">
+                <Image
+                      className="rounded-md"
+                      src={user?.image_url}
+                      width={44}
+                      height={44}
+                    />
+                </TableCell>
+                <TableCell>
+                {user.first_name} {user.last_name}
+                </TableCell>
+                <TableCell>
+                {" "}
+                    <a
+                      href={`mailto:${user.email_addresses[0]?.email_address}`}
                     >
-                      Promote as Admin
-                    </Button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                      {" "}
+                      {user.email_addresses[0]?.email_address}
+                    </a>{" "}
+                </TableCell>
+                <TableCell>
+                {new Date(user.created_at).toLocaleDateString(
+                      "en-GB",
+                      dateOptions
+                    )}
+                </TableCell>
+                <TableCell>
+                {new Date(user?.last_sign_in_at).toLocaleDateString(
+                      "en-GB",
+                      dateOptions
+                    )}
+                </TableCell>
+                <TableCell className="text-right">
+                {adminConfig.emails.includes(
+                      user.email_addresses[0]?.email_address
+                    ) ? (
+                      <Button>Admin</Button>
+                    ) : (
+                      <Button
+                        onClick={() =>
+                          handleAddAdmin(user.email_addresses[0]?.email_address)
+                        }
+                      >
+                        Promote as Admin
+                      </Button>
+                    )}
+                </TableCell>
+              </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </>
       )}
     </div>
   );
