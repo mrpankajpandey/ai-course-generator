@@ -1,8 +1,8 @@
 import { adminConfig } from "@/configs/AdminConfig";
-import { UserButton, useUser } from "@clerk/nextjs";
+import { useClerk, UserButton, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { CiPower } from "react-icons/ci";
 import {
@@ -22,9 +22,14 @@ import {
 const Header = () => {
   const { user } = useUser();
   const path = usePathname();
+  const { signOut } = useClerk();
+  const router = useRouter();
   const isAdmin = adminConfig.emails.includes(
     user?.primaryEmailAddress?.emailAddress
   );
+  const handleLogout = async () => {
+    await signOut({ redirectTo: '/' }); // Redirect after logout
+  };
   const menu = [
     {
       id: 1,
@@ -60,6 +65,7 @@ const Header = () => {
       name: "Logout",
       icon: <CiPower />,
       path: "/dashboard/logout",
+      isLogout: true,
     },
   ];
   return (
@@ -73,6 +79,17 @@ const Header = () => {
               <DropdownMenuTrigger className="p-4">Menu</DropdownMenuTrigger>
               <DropdownMenuContent>
         {menu.map((item) => (
+           item.isLogout ? (
+            <li
+            key={item.id}
+            className={`flex items-center gap-2 text-gray-600 cursor-pointer p-3 hover:bg-gray-100 hover:text-black rounded-lg mb-3`}
+            onClick={handleLogout}
+          >
+            <div>{item.icon}</div>
+            <h2>{item.name}</h2>
+          </li>
+        ) : (
+
           <Link href={item.path}>
                 <DropdownMenuItem>
                   <li
@@ -86,6 +103,7 @@ const Header = () => {
                   </li>
                 </DropdownMenuItem>
           </Link>
+        )
         ))}
         </DropdownMenuContent>
       </DropdownMenu>

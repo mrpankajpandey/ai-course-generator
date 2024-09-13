@@ -7,24 +7,28 @@ import { HiOutlineHome } from "react-icons/hi";
 import { CiPower } from "react-icons/ci";
 import { HiOutlineShieldCheck } from "react-icons/hi";
 import { HiOutlineSquare3Stack3D } from "react-icons/hi2";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { UserCourseListContext } from "@/app/_context/UserCourseListContext";
 import Image from "next/image";
-import { useUser } from "@clerk/nextjs";
+import { useClerk, useUser } from "@clerk/nextjs";
 import { adminConfig } from "@/configs/AdminConfig";
 
 const Sidebar = () => {
   const { user } = useUser();
   const path = usePathname();
+  const { signOut } = useClerk();
+  const router = useRouter();
   const { userCourseList, setUserCourseList } = useContext(
     UserCourseListContext
   );
 
-  const isAdmin = adminConfig.emails.includes(user?.primaryEmailAddress?.emailAddress);
-  
-  
-  
+  const isAdmin = adminConfig.emails.includes(
+    user?.primaryEmailAddress?.emailAddress
+  );
+  const handleLogout = async () => {
+    await signOut({ redirectTo: '/' }); // Redirect after logout
+  };
   const menu = [
     {
       id: 1,
@@ -60,6 +64,7 @@ const Sidebar = () => {
       name: "Logout",
       icon: <CiPower />,
       path: "/dashboard/logout",
+      isLogout: true,
     },
   ];
 
@@ -83,24 +88,39 @@ const Sidebar = () => {
       <hr className="my-3" />
       <ul>
         {menu.map((item) => (
-          <Link href={item.path}>
-            <li
+             item.isLogout ? (
+              <li
               key={item.id}
-              className={`flex items-center gap-2 text-gray-600 cursor-pointer p-3 hover:bg-gray-100 hover:text-black rounded-lg mb-3 ${
-                item.path == path && "bg-gray-100 text-black"
-              }`}
+              className={`flex items-center gap-2 text-gray-600 cursor-pointer p-3 hover:bg-gray-100 hover:text-black rounded-lg mb-3`}
+              onClick={handleLogout}
             >
               <div>{item.icon}</div>
               <h2>{item.name}</h2>
             </li>
-          </Link>
-        ))}
+          ) : (
+
+            <Link href={item.path} key={item.id}>
+              <li
+                key={item.id}
+                className={`flex items-center gap-2 text-gray-600 cursor-pointer p-3 hover:bg-gray-100 hover:text-black rounded-lg mb-3 ${item.path == path && "bg-gray-100 text-black"}`}
+              >
+                
+                <div>{item.icon}</div>
+                <h2>{item.name}</h2>
+              </li>
+            </Link>
+            )
+          ))}
       </ul>
       <div className="absolute bottom-10 w-[80%]">
         <h2 className="text-sm my-2 ">
           {/* {userCourseList?.length} out of 3 course created.
            */}
-          {isAdmin ? <Progress value={(courseCount / 100) * 100} /> :<Progress value={(courseCount / maxCourses) * 100} />  }
+          {isAdmin ? (
+            <Progress value={(courseCount / 100) * 100} />
+          ) : (
+            <Progress value={(courseCount / maxCourses) * 100} />
+          )}
           {isAdmin
             ? `Courses Created: ${courseCount}`
             : `${courseCount} out of ${maxCourses} courses created`}
