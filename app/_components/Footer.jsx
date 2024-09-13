@@ -6,7 +6,7 @@ import { SiBuymeacoffee } from 'react-icons/si'
 const Footer = () => {
   return (
    
-    <div className='mx-auto max-w-screen-xl px-4 flex items-center gap-10 justify-center'>
+    <div className='mx-auto max-w-screen-xl flex items-center gap-10 justify-center '>
              <hr />
         <footer className='shadow-sm'>
             <div className='max-w-screen-2xl   container mx-auto px-4 md:px-20 my-5'>

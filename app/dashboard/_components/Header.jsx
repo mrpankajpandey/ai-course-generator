@@ -5,12 +5,26 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { CiPower } from "react-icons/ci";
-import { HiOutlineHome, HiOutlineShieldCheck, HiOutlineSquare3Stack3D } from "react-icons/hi2";
+import {
+  HiOutlineHome,
+  HiOutlineShieldCheck,
+  HiOutlineSquare3Stack3D,
+} from "react-icons/hi2";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const { user } = useUser();
   const path = usePathname();
-  const isAdmin = adminConfig.emails.includes(user?.primaryEmailAddress?.emailAddress);
+  const isAdmin = adminConfig.emails.includes(
+    user?.primaryEmailAddress?.emailAddress
+  );
   const menu = [
     {
       id: 1,
@@ -54,21 +68,27 @@ const Header = () => {
         <Image src={"/logo.png"} width={44} height={44} />{" "}
         <span className="font-bold text-xl">Ai Course Generator</span>
       </div>
-      <div className="md:hidden flex items-center border rounded-md">
-      {menu.map((item) => (
+      <div className="md:hidden">
+            <DropdownMenu className=''>
+              <DropdownMenuTrigger className="p-4">Menu</DropdownMenuTrigger>
+              <DropdownMenuContent>
+        {menu.map((item) => (
           <Link href={item.path}>
-            <li
-              key={item.id}
-              className={`flex text-xs items-center gap-1 text-gray-600 cursor-pointer p-3 hover:bg-gray-100 hover:text-black rounded-lg mb-3 ${
-                item.path == path && "bg-gray-100 text-black"
-              }`}
-            >
-              <div>{item.icon}</div>
-              <h2>{item.name}</h2>
-            </li>
+                <DropdownMenuItem>
+                  <li
+                    key={item.id}
+                    className={`flex text-xs items-center gap-1 text-gray-600 cursor-pointer p-3 hover:bg-gray-100 hover:text-black rounded-lg mb-3 ${
+                      item.path == path && "bg-gray-100 text-black"
+                    }`}
+                  >
+                    <div>{item.icon}</div>
+                    <h2>{item.name}</h2>
+                  </li>
+                </DropdownMenuItem>
           </Link>
         ))}
-
+        </DropdownMenuContent>
+      </DropdownMenu>
       </div>
       <UserButton />
     </div>

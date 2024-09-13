@@ -24,6 +24,7 @@ const Sidebar = () => {
   const isAdmin = adminConfig.emails.includes(user?.primaryEmailAddress?.emailAddress);
   
   
+  
   const menu = [
     {
       id: 1,
@@ -96,18 +97,20 @@ const Sidebar = () => {
         ))}
       </ul>
       <div className="absolute bottom-10 w-[80%]">
-        <Progress value={(userCourseList?.length / 3) * 100} />
-        <h2 className="text-sm my-2 ">
           {/* {userCourseList?.length} out of 3 course created.
            */}
           {isAdmin
             ? `Courses Created: ${courseCount}`
             : `${courseCount} out of ${maxCourses} courses created`}
+            <Progress value={(userCourseList?.length / 100) * 100} />
+           <h2 className="text-sm my-2 ">
         </h2>
-        {!isAdmin && needsUpgrade && (
+        {!isAdmin && needsUpgrade && (<>
+           <Progress value={(userCourseList?.length / 3) * 100} />
           <h2 className="text-xs text-gray-500">
             Upgrade your plan to unlimted course generate
           </h2>
+        </>
         )}
       </div>
     </div>
