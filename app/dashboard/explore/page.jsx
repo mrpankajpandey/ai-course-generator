@@ -25,7 +25,7 @@ const Explore = () => {
     <div>
       <h2 className='font-bold text-3xl'>Explore More Projects</h2>
       <p>Explore more project build with AI by other users</p>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-col-4 gap-5 mt-3'>
+      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-col-4 gap-5 mt-3'>
         {
           courseList?.length>0?courseList.map((course, index)=>(
             <CourseCard course={course} key={index} displayUser={true}/>
