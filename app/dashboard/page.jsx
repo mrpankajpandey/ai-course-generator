@@ -5,6 +5,7 @@ import { CourseList } from '@/configs/Schema'
 import UserCourseList from './_components/UserCourseList'
 import Addcourse from './_components/AddCourse'
 
+
 const Dashboard = () => {
   return (
     <div>
