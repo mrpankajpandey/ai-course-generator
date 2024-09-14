@@ -19,25 +19,52 @@ const courseLayout = ({ params }) => {
   const { user } = useUser();
   const [course, setCourse] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isCourseValid, setIsCourseValid] = useState(false);
   const router =  useRouter();
 
   useEffect(() => {
-    params && GetCourse();
+    if (params?.courseId) {
+      GetCourse();
+    } else {
+      setIsCourseValid(false);
+    }
+    
   }, [params, user]);
   const GetCourse = async () => {
-    const result = await db
-      .select()
-      .from(CourseList)
-      .where(
-        and(
-          eq(CourseList.courseId, params?.courseId),
-          eq(CourseList?.createdBy, user?.primaryEmailAddress?.emailAddress)
-        )
-      );
+    if (!params?.courseId || !user?.primaryEmailAddress?.emailAddress) {
+      console.error("Course ID or User email is missing");
+      setIsCourseValid(false);
+      return;
+    }
+    try {
+      
+      const result = await db
+        .select()
+        .from(CourseList)
+        .where(
+          and(
+            eq(CourseList.courseId, params?.courseId),
+            eq(CourseList?.createdBy, user?.primaryEmailAddress?.emailAddress)
+          )
+        );
+        if (result.length > 0) {
+          setCourse(result[0]);
+          setIsCourseValid(true);
+        } else {
+          setIsCourseValid(false);
+        }
+  
+    } catch (error) {
+      setIsCourseValid(false);
+    } 
     // console.log(result);
-    setCourse(result[0]);
+    // setCourse(result[0]);
   };
   const GenerateChapterContent = async () => {
+    if (!course?.courseId || !course?.courseOutput?.course?.chapters) {
+      // toast.error("Course or chapters are missing. Cannot generate content.");
+      return;
+    }
     setLoading(true);
     const chapters = course?.courseOutput?.course?.chapters;
     chapters.forEach(async (chapter, index) => {
@@ -95,7 +122,7 @@ const courseLayout = ({ params }) => {
       {/* list pf lession  */}
       <ChapterList course={course} refreshData={() => GetCourse()} />
 
-      <Button onClick={GenerateChapterContent} className="my-10">
+      <Button disabled={!isCourseValid} onClick={GenerateChapterContent} className="my-10">
         Generate Course Content
       </Button>
       <Toaster />
