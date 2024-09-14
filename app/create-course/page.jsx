@@ -16,103 +16,130 @@ import { CourseList } from "@/configs/Schema";
 import uuid4 from "uuid4";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-
-
+import { adminConfig } from "@/configs/AdminConfig";
 
 const CreateCourse = () => {
-
-    const StepperOptions = [
-        {
-            id: 1,
-            name: "Category",
-            icon: <HiMiniSquares2X2 />,
-        },
-        {
-            id: 2,
-            name: "Topics & Desc",
-            icon: <HiLightBulb />,
-        },
-        {
-            id: 3,
-            name: "Options",
-            icon: <HiClipboardDocumentCheck />,
+  const StepperOptions = [
+    {
+      id: 1,
+      name: "Category",
+      icon: <HiMiniSquares2X2 />,
     },
-];
+    {
+      id: 2,
+      name: "Topics & Desc",
+      icon: <HiLightBulb />,
+    },
+    {
+      id: 3,
+      name: "Options",
+      icon: <HiClipboardDocumentCheck />,
+    },
+  ];
 
-const [activeIndex, setActiveIndex] = useState(0);
-const [loading, setLoading] =  useState(false);
-const { userCourseInput, setUserCourseInput } = useContext(UserInputContext);
-const {user} = useUser();
-const router =  useRouter();
-useEffect(()=>{
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const { userCourseInput, setUserCourseInput } = useContext(UserInputContext);
+  const { user } = useUser();
+  const router = useRouter();
+  useEffect(() => {
     //  console.log(userCourseInput);
-     
-},[userCourseInput])
+  }, [userCourseInput]);
 
-// Used to check next Button Enable or Disable status 
-const checkStaus = ()=>{
-     if(userCourseInput?.length ==0){
-        return true;
-     }
-     if(activeIndex ==0 && (userCourseInput?.category?.length==0 || userCourseInput?.category== undefined)){
-        return true;
-     }
-     if(activeIndex == 1 && (userCourseInput?.topic?.length ==0 || userCourseInput?.topic== undefined)){
-        return true;
-     }
-     if(activeIndex ==2 &&(userCourseInput?.level== undefined || userCourseInput?.duration==undefined || userCourseInput?.displayVideo== undefined || userCourseInput?.noOfChapter == undefined)){
-        return true
-     }
-     return false;
-}
+  // Used to check next Button Enable or Disable status
+  const checkStaus = () => {
+    if (userCourseInput?.length == 0) {
+      return true;
+    }
+    if (
+      activeIndex == 0 &&
+      (userCourseInput?.category?.length == 0 ||
+        userCourseInput?.category == undefined)
+    ) {
+      return true;
+    }
+    if (
+      activeIndex == 1 &&
+      (userCourseInput?.topic?.length == 0 ||
+        userCourseInput?.topic == undefined)
+    ) {
+      return true;
+    }
+    if (
+      activeIndex == 2 &&
+      (userCourseInput?.level == undefined ||
+        userCourseInput?.duration == undefined ||
+        userCourseInput?.displayVideo == undefined ||
+        userCourseInput?.noOfChapter == undefined)
+    ) {
+      return true;
+    }
+    return false;
+  };
 
-const GenerateCourseLayout = async()=>{
-  setLoading(true);
-  const BASIC_PROMPT = 'Generate a Course Tutorial with the following details: Course Name, Description, Chapter Name, About, Duration, and structure it in JSON format as an object with a "course" field containing these attributes: ';
-  const USER_INPUT_PROMPT = 'Category: ' + userCourseInput?.category + 
-                            ', Topic: ' + userCourseInput?.topic + 
-                            ', Level: ' + userCourseInput?.level + 
-                            ', Duration: ' + userCourseInput?.duration + 
-                            ', NoOfChapters: ' + userCourseInput?.noOfChapter;
-  const FINAL_PROMPT = BASIC_PROMPT + USER_INPUT_PROMPT + 
-                       '. The JSON should include "course" with "name", "description", and an array of "chapters" objects.';
-  
-  console.log(FINAL_PROMPT);
-  
-  // Fetch response
-  const result = await GenerateCourseLayoutAI.sendMessage(FINAL_PROMPT);
-  console.log(result.response?.text());
-  
-  const parsedResult = JSON.parse(result.response?.text());
-  console.log(parsedResult);
-  
-      setLoading(false);
-      saveCourseLayoutDb(JSON.parse(result.response?.text()));
-      
-}
+  const isAdmin = adminConfig.emails.includes(user?.primaryEmailAddress?.emailAddress);
+  const GenerateCourseLayout = async () => {
+    if(!isAdmin){
+      const numberOfChapter = userCourseInput?.noOfChapter; 
+      if(numberOfChapter>10){
+        alert("You cannot select more than 10 chapters.");
+        return;
+      }
+    }
 
-const saveCourseLayoutDb =  async(courseLayout)=>{
-  var id = uuid4(); // course Id
-  setLoading(true);
+    setLoading(true);
+    const BASIC_PROMPT =
+      'Generate a Course Tutorial with the following details: Course Name, Description, Chapter Name, About, Duration, and structure it in JSON format as an object with a "course" field containing these attributes: ';
+    const USER_INPUT_PROMPT =
+      "Category: " +
+      userCourseInput?.category +
+      ", Topic: " +
+      userCourseInput?.topic +
+      ", Level: " +
+      userCourseInput?.level +
+      ", Duration: " +
+      userCourseInput?.duration +
+      ", NoOfChapters: " +
+      userCourseInput?.noOfChapter;
+    const FINAL_PROMPT =
+      BASIC_PROMPT +
+      USER_INPUT_PROMPT +
+      '. The JSON should include "course" with "name", "description", and an array of "chapters" objects.';
 
-  const result =  await db.insert(CourseList).values({
-    courseId:id,
-    name : userCourseInput?.topic,
-    level:userCourseInput?.level,
-    category:userCourseInput?.category,
-    courseOutput:courseLayout,
-    createdBy:user?.primaryEmailAddress?.emailAddress,
-    userName:user?.fullName,
-    userProfileImage:user?.imageUrl
-  })
+    console.log(FINAL_PROMPT);
 
-  console.log("Finshed");
+    // Fetch response
+    const result = await GenerateCourseLayoutAI.sendMessage(FINAL_PROMPT);
+    console.log(result.response?.text());
 
-  
-  setLoading(false);
-  router.replace('/create-course/'+id);
-}
-return (
+    const parsedResult = JSON.parse(result.response?.text());
+    console.log(parsedResult);
+
+    setLoading(false);
+    saveCourseLayoutDb(JSON.parse(result.response?.text()));
+  };
+
+  const saveCourseLayoutDb = async (courseLayout) => {
+    var id = uuid4(); // course Id
+    setLoading(true);
+
+    const result = await db.insert(CourseList).values({
+      courseId: id,
+      name: userCourseInput?.topic,
+      level: userCourseInput?.level,
+      category: userCourseInput?.category,
+      courseOutput: courseLayout,
+      createdBy: user?.primaryEmailAddress?.emailAddress,
+      userName: user?.fullName,
+      userProfileImage: user?.imageUrl,
+    });
+
+    console.log("Finshed");
+
+    setLoading(false);
+    router.replace("/create-course/" + id);
+  };
+  return (
     <div>
       {/* steper */}
       <div className="flex flex-col justify-center items-center mt-10">
@@ -144,27 +171,42 @@ return (
 
       <div className="px-10 md:px-20 lg:px-44 mt-10">
         {/* components */}
-        {activeIndex==0?<SelectCategory/> : activeIndex==1?<TopicDescription/> : <SelectOption/>}
-
+        {activeIndex == 0 ? (
+          <SelectCategory />
+        ) : activeIndex == 1 ? (
+          <TopicDescription />
+        ) : (
+          <SelectOption />
+        )}
 
         {/* next previous button  */}
         <div className="flex justify-between mt-10">
           <Button
             disabled={activeIndex == 0}
             onClick={() => setActiveIndex(activeIndex - 1)}
-            variant = 'outline'
+            variant="outline"
           >
             Previous
           </Button>
           {activeIndex < 2 && (
-            <Button disabled = {checkStaus()} onClick={() => setActiveIndex(activeIndex + 1)}>
+            <Button
+              disabled={checkStaus()}
+              onClick={() => setActiveIndex(activeIndex + 1)}
+            >
               Next
             </Button>
           )}
-          {activeIndex == 2 && <Button disabled = {checkStaus()} onClick={()=> GenerateCourseLayout()}>Gerate Course Layout</Button>}
+          {activeIndex == 2 && (
+            <Button
+              disabled={checkStaus()}
+              onClick={() => GenerateCourseLayout()}
+            >
+              Gerate Course Layout
+            </Button>
+          )}
         </div>
       </div>
-      <Loading loading={loading}/>
+      <Loading loading={loading} />
     </div>
   );
 };
