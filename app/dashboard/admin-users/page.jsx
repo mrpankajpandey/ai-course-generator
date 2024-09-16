@@ -55,7 +55,7 @@ const AdminUsers = () => {
 
   const dateOptions = {
     day: "2-digit",
-    month: "long", // This will give you the full month name
+    month: "long", 
     year: "numeric",
   };
 
