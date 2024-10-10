@@ -42,9 +42,7 @@ An AI-powered platform for creating and managing online courses. Built using **N
 
    ```bash
    git clone https://github.com/mrpankajpandey/ai-course-generator.git
-
-   ```bash
-    git clone https://github.com/mrpankajpandey/ai-course-generator.git
+   
    ```
 
 2. ## Environment Variables
@@ -61,5 +59,26 @@ An AI-powered platform for creating and managing online courses. Built using **N
 # Live Demo
  ## Check out the live version of the project here: [AI Course Generator](https://mrpankajpandey-ai-course.vercel.app/)
 
- # Contributing to AI Course Generator [CONTRIBUTING.md](https://github.com/mrpankajpandey/ai-course-generator/blob/main/CONTRIBUTING.md)
+# Contributing to AI Course Generator
+
+Thank you for your interest in contributing to the AI Course Generator! We appreciate your help in making this project better. Please follow these guidelines to ensure a smooth contribution process.
+
+## How to Contribute
+
+1. **Fork the repository**: Click the "Fork" button on the top-right corner of the repository page to create your own copy of the repository.
+
+2. **Clone the repository**: Clone the forked repository to your local machine using the command below:
+
+   ```bash
+   git clone https://github.com/your-username/ai-course-generator.git
+   ```
+3. **Create a new branch**: Before starting work on your changes, create a new branch using the following command. Use a meaningful branch name based on the feature or fix you're implementing:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+4. **Make your changes**: Implement your feature or bug fix, following the project's coding style and guidelines. Make sure to test your changes thoroughly.
+5. **Commit your changes**: Once you're satisfied with your changes, commit them using the following commands:
+   ```bash
+   git commit -m "Add a meaningful message describing your changes"
+   ```
 
