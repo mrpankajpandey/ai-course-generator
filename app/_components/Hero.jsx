@@ -11,15 +11,15 @@ const Hero = () => {
         <div className="mx-auto max-w-screen-xl px-4 pt-32 pb-10 lg:flex lg:items-center">
           <div className="mx-auto max-w-xl text-center">
             <h1 className="text-3xl font-extrabold sm:text-5xl text-primary">
-              <span className="text-black"> Ai Course </span>Generator.
+              <span className="text-black"> A Course </span>Generator.
               <strong className=" mt-12 font-medium text-3xl text-black sm:block">
                 {" "}
-                Custom Learning paths, Powered By Ai.{" "}
+                Custom Learning paths, Powered By AI.{" "}
               </strong>
             </h1>
 
             <p className="mt-4 text-xm relaxed">
-              Unlock personalized education with Ai-driven course creation.
+              Unlock personalized education with AI-driven course creation.
               Tailor your learning journey to fit your unique goals and pace.
             </p>
 

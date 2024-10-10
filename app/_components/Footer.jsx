@@ -1,5 +1,5 @@
 "use client"
-import { LinkedInLogoIcon } from '@radix-ui/react-icons'
+import { FaLinkedin } from "react-icons/fa6";
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -98,10 +98,10 @@ const Footer = () => {
             href="https://linkedin.com/in/mrpankajpandey"
             rel="noreferrer"
             target="_blank"
-            className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+            className="text-gray-700 text-2xl transition hover:opacity-75 dark:text-gray-200"
           >
             <span className="sr-only">LinkedIn</span>
-              <LinkedInLogoIcon  />
+            <FaLinkedin />
           </a>
         </li>
       </ul>
