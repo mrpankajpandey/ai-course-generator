@@ -11,7 +11,7 @@ const Addcourse = () => {
     
     console.log(userCourseList?.length);
   const isAdmin = user?.primaryEmailAddress?.emailAddress == 'mr.pankajpandey0038@gmail.com';
-  const hasCourseLimit = userCourseList?.length >= 3;
+  const hasCourseLimit = userCourseList?.length >= 2;
   const destination = isAdmin || !hasCourseLimit ? '/create-course' : '/dashboard/upgrade';
     
   return (

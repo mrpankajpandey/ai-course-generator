@@ -72,7 +72,7 @@ const Sidebar = () => {
   // Define the email of the admin user
 
   // Set max courses for regular users
-  const maxCourses = 3;
+  const maxCourses = 2;
   const courseCount = userCourseList?.length || 0;
 
   // Calculate progress
