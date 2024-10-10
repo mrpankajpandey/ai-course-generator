@@ -44,3 +44,6 @@ An AI-powered platform for creating and managing online courses. Built using **N
 
 # Live Demo
  ## Check out the live version of the project here: [AI Course Generator](https://mrpankajpandey-ai-course.vercel.app/)
+
+ # Contributing to AI Course Generator [CONTRIBUTING.md](https://github.com/mrpankajpandey/ai-course-generator/blob/main/CONTRIBUTING.md)
+
