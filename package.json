@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^5.0.35",
-    "@clerk/nextjs": "^5.4.1",
+    "@clerk/nextjs": "^5.7.2",
     "@google/generative-ai": "^0.17.1",
     "@neondatabase/serverless": "^0.9.5",
     "@radix-ui/react-alert-dialog": "^1.1.1",
@@ -27,7 +27,8 @@
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.33.0",
     "firebase": "^10.13.1",
-    "next": "^14.2.8",
+    "i": "^0.3.7",
+    "next": "^14.2.15",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
