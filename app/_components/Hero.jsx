@@ -25,7 +25,7 @@ const Hero = () => {
 
             <div className="mt-40 flex flex-wrap justify-center gap-4">
               <Link href={"/explore-course"}>
-                <Button size="lg">Explore Now.<HiChevronDoubleRight className="text-xl" /></Button>
+                <Button variant="startButton" size="lg">Explore Now.<HiChevronDoubleRight className="text-xl" /></Button>
               </Link>
             </div>
           </div>
