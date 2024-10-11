@@ -2,9 +2,10 @@
 
 An AI-powered platform for creating and managing online courses. Built using **Next.js** and integrated with **Clerk** for authentication, **Gemini API** for AI-generated content, and **Firebase** for file storage, this platform allows users to create, track, and manage their courses, while administrators can oversee user and course management.
 
-![Screenshot 2024-10-10 191005](https://github.com/user-attachments/assets/44368bc8-42fa-4c2b-b517-0379013d02de)
-![Screenshot 2024-10-10 191023](https://github.com/user-attachments/assets/803fb065-3d53-4c4a-ae70-4f83a6d881e4)
-![Screenshot 2024-10-10 191037](https://github.com/user-attachments/assets/bb2a5493-5e20-4803-9e2f-5f825e448b91)
+![Screenshot 2024-10-10 191005](https://github.com/user-attachments/assets/c504a57c-0c20-4fca-b083-ac78f8625deb)
+![Screenshot 2024-10-10 191023](https://github.com/user-attachments/assets/8a5badbf-8473-4eae-b954-088291ee003c)
+![Screenshot 2024-10-10 191037](https://github.com/user-attachments/assets/6a20e06a-2a32-4614-8db9-adec722171b2)
+
 
 ## 📋 Index
 
