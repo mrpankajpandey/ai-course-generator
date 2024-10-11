@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import React from 'react'
+import Header from './Header'
+import Footer from './Footer'
 
 const TermsAndCondition = () => {
   return (
@@ -10,6 +12,7 @@ const TermsAndCondition = () => {
         <meta name="keywords" content="terms and conditions, AI courses, legal" />
         <link rel="canonical" href="https://www.yourwebsite.com/terms-and-conditions" />
       </Head>
+      <Header/>
     <div className="container mx-auto px-4 py-8">
     <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
     <p className="mb-4">
@@ -36,9 +39,10 @@ const TermsAndCondition = () => {
       We may update these terms and conditions from time to time. Your continued use of the website following any changes will be deemed acceptance of those changes.
     </p>
     <p className="mb-4">
-      If you have any questions about these terms, please contact us at <strong>support@aicoursegenerator.com</strong>.
+      If you have any questions about these terms, please contact us at <strong>mr.pankajpandey0038@gmail.com</strong>.
     </p>
   </div>
+  <Footer/>
     </>
   )
 }
