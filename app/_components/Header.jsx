@@ -28,7 +28,7 @@ const Header = () => {
       <Image src={'/logo.png'} width={44} height={44} /> <span className="font-bold text-xl">AI Course Generator</span>
       </div>
       <Link href={'/dashboard'}>
-      <Button> Get started</Button>
+      <Button variant="startButton" > Get started</Button>
       </Link>
     </div>
     </>

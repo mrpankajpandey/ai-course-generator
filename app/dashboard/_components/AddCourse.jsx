@@ -22,7 +22,7 @@ const Addcourse = () => {
         </div>
 
         <Link href={destination}>
-        <Button>+ Create AI Course</Button>
+        <Button variant="startButton">+ Create AI Course</Button>
         </Link>
         
     </div>
