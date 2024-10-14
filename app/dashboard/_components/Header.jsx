@@ -71,7 +71,7 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center gap-2 p-5 shadow-sm">
       <div className="flex items-center gap-2">
-           <Link className="flex items-center gap-2" href={'/'}>
+           <Link className="flex items-center gap-2 cursor-pointer" href={'/'}>
         <Image src={"/logo.png"} width={44} height={44} />{" "}
         <span className="font-bold text-xl">AI Course Generator</span>
            </Link>

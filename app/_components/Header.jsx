@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { RxGithubLogo } from "react-icons/rx";
+
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,9 +30,15 @@ const Header = () => {
       <Image src={'/logo.png'} width={44} height={44} /> <span className="font-bold text-xl">AI Course Generator</span>
       </Link>
       </div>
-      <Link href={'/dashboard'}>
+      <div className="flex justify-center items-center gap-10 cursor-pointer">
+       <Link href={"https://github.com/mrpankajpandey/ai-course-generator" }>
+         <RxGithubLogo className="text-3xl"/>
+       </Link>          
+      <Link href={'/dashboard'} >
+
       <Button variant="startButton" > Get started</Button>
       </Link>
+      </div>
     </div>
     </>
   );

@@ -23,7 +23,7 @@ const Hero = () => {
               Tailor your learning journey to fit your unique goals and pace.
             </p>
 
-            <div className="mt-40 flex flex-wrap justify-center gap-4">
+            <div className="mt-40 flex flex-wrap justify-center gap-4 cursor-pointer">
               <Link href={"/explore-course"}>
                 <Button variant="startButton" size="lg">Explore Now.<HiChevronDoubleRight className="text-xl" /></Button>
               </Link>
