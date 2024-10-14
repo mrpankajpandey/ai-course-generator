@@ -9,7 +9,7 @@ const Footer = () => {
   const path = usePathname();
   const menu = [
     {id:1,
-      name:'About US',
+      name:'About Us',
       path:'/about'
     },
     {id:1,
