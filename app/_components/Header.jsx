@@ -24,8 +24,9 @@ const Header = () => {
       </Head>
     <div className="flex justify-between p-5 shadow-sm items-center">
       <div className="flex items-center gap-2">
-
+      <Link  href={'/'}  className="flex justify-center items-center gap-2">
       <Image src={'/logo.png'} width={44} height={44} /> <span className="font-bold text-xl">AI Course Generator</span>
+      </Link>
       </div>
       <Link href={'/dashboard'}>
       <Button variant="startButton" > Get started</Button>

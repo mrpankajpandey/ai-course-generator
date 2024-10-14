@@ -105,6 +105,7 @@ const AdminUsers = () => {
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Registered Users</h1>
+      <div className="overflow-auto max-h-[400px]">
       <Table>
         <TableCaption>Total User: {userCount}</TableCaption>
         <TableHeader>
@@ -168,6 +169,7 @@ const AdminUsers = () => {
           ))}
         </TableBody>
       </Table>
+      </div>
     </div>
   );
 };
