@@ -1,27 +1,12 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import { NextResponse } from 'next/server';
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-// Define protected routes
-const isProtectedRoute = createRouteMatcher(['/dashboard(.*)', '/create-course']);
+const isProtectedRoute = createRouteMatcher(
+    ['/dashboard(.*)','/create-course']
+)
 
 export default clerkMiddleware((auth, req) => {
-  // Get the User-Agent from the request headers
-  const userAgent = req.headers.get('user-agent') || '';
-  
-  // Check if the request is made by Googlebot
-  const isGoogleBot = userAgent.includes('Googlebot');
-
-  // Allow Googlebot to access protected routes or any non-protected routes
-  if (isGoogleBot || !isProtectedRoute(req)) {
-    return NextResponse.next(); // Allow access
-  }
-
-  // If the route is protected, enforce authentication
-  return auth().protect();
-  
-  // return response; // Ensure to return the response from auth().protect()
-});
-
+  if (isProtectedRoute(req)) auth().protect()
+})
 export const config = {
   matcher: [
     // Skip Next.js internals and all static files, unless found in search params
@@ -29,4 +14,4 @@ export const config = {
     // Always run for API routes
     '/(api|trpc)(.*)',
   ],
-};
+}
