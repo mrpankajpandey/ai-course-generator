@@ -17,7 +17,7 @@ export default clerkMiddleware((auth, req) => {
   }
 
   // If the route is protected, enforce authentication
-  auth().protect();
+  return auth().protect();
   
   // return response; // Ensure to return the response from auth().protect()
 });
