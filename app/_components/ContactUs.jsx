@@ -40,12 +40,12 @@ const ContactUs = () => {
         <meta name="keywords" content="contact, customer support, AI courses" />
         <link rel="canonical" href="https://https://mrpankajpandey-ai-course.vercel.app/contact-us" />
       </Head>
-      <div name="Contact" className='max-w-screen-2xl ontainer mx-auto px-4 md:px-20 my-10 '>
+      <div name="Contact" className='max-w-screen-2xl container mx-auto px-4 md:px-20 my-10 '>
       <h2 className='text-3xl font-semibold mb-4 '>Contact Me</h2>
       <div className=''>
         <form method='POST' onSubmit={handleSubmit(onSubmit)}  className='flex w-full flex-col  items-center gap-5 border bottom-1 p-3 shadow-sm'>
-            <h2 className='text-2xl font-normal'>Send me a Mesaage</h2>
-            <h4 className="text-xl font-mono">I'am Very Responsive To Message </h4>
+            <h2 className='text-2xl font-normal'>Send me a Message</h2>
+            <h4 className="text-xl font-mono">I will be fast to respond to your messages or suggestions. </h4>
             <div className='w-full md:w-1/2 flex flex-col gap-2'>
                 <input {...register("name", { required: true })} name='name' value={name} onChange={(e) => setName(e.target.value)} className='w-full h-[50px] rounded-full leading-tight border border-black py-2 px-4 dark:bg-[#1c1b23]' type="text" placeholder='Name'/>
                 {errors.name && <span className='text-red-300 mx-4' >This field is required</span>}
