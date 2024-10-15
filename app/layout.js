@@ -46,7 +46,7 @@ export default function RootLayout({ children }) {
 
           {/* Twitter Meta Tags */}
           <meta name="twitter:card" content={metadata.twitter.card} />
-          <meta name="google-adsense-account" content={process.env.NEXT_PUBLIC_AD_CLIENT_ID}></meta>
+          <meta name="google-adsense-account" content="ca-pub-1034833348897670">
           <meta name="twitter:title" content={metadata.twitter.title} />
           <meta name="twitter:description" content={metadata.twitter.description} />
           <meta name="twitter:image" content={metadata.twitter.image} />
