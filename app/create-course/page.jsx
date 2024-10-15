@@ -201,7 +201,7 @@ const CreateCourse = () => {
               disabled={checkStaus()}
               onClick={() => GenerateCourseLayout()}
             >
-              Gerate Course Layout
+              Generate Course Layout
             </Button>
           )}
         </div>

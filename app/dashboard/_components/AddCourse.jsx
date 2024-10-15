@@ -18,7 +18,7 @@ const Addcourse = () => {
     <div  className='flex justify-between items-center'>
         <div>
             <h2 className='text-xl'>Hello, <span className='font-bold'> {user?.fullName} </span> </h2>
-            <p className='text-sm text-gray-500'>Create new course with Ai, Share with friends and Earn form it.</p>
+            <p className='text-sm text-gray-500'>Create new courses with AI,share them with your friends and earn from them.</p>
         </div>
 
         <Link href={destination}>
